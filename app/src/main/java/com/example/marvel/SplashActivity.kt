@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions.bitmapTransform
 import com.example.marvel.databinding.SplashMainBinding
-import com.example.marvel.utils.extensions.setNoLimitsWindow
+import com.example.marvel.utils.Extensions.setNoLimitsWindow
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay

@@ -2,7 +2,7 @@ package com.example.marvel
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.marvel.utils.extensions.setNoLimitsWindow
+import com.example.marvel.utils.Extensions.setNoLimitsWindow
 
 class CharactersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
