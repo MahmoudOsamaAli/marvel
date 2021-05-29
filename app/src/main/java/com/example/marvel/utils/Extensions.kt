@@ -3,7 +3,7 @@ package com.example.marvel.utils
 import android.app.Activity
 import android.view.WindowManager
 
-object extensions {
+object Extensions {
 
     fun Activity.setNoLimitsWindow(){
         window.setFlags(
