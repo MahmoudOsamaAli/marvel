@@ -1,5 +1,6 @@
 package com.example.marvel.ui.charactersActivity.adapters
 
+import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,10 +9,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.ViewAnimator
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
+import androidx.core.util.Pair
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel.R
 import com.example.marvel.model.ResultsItem
+import com.example.marvel.ui.characterDetails.CharacterDetailsActivity
+import com.example.marvel.ui.charactersActivity.CharactersActivity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import io.alterac.blurkit.BlurLayout
@@ -21,7 +27,7 @@ class CharactersViewHolder(view: View) :
     RecyclerView.ViewHolder(view) {
 
     private val name: TextView = view.findViewById(R.id.character_name)
-    private val blurBackground: BlurLayout = view.findViewById(R.id.blur_background)
+//    private val blurBackground: BlurLayout = view.findViewById(R.id.blur_background)
     private val image: ImageView = view.findViewById(R.id.character_image)
     private val animator: ViewAnimator = view.findViewById(R.id.animator)
     private val context = view.context
@@ -30,7 +36,20 @@ class CharactersViewHolder(view: View) :
 
     init {
         view.setOnClickListener {
-
+            try {
+                val intent = Intent(context,CharacterDetailsActivity::class.java)
+//                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as CharactersActivity,image,ViewCompat.getTransitionName(image)!!)
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as CharactersActivity
+                    ,Pair.create(image,ViewCompat.getTransitionName(image)!!)
+                    ,Pair.create(name,ViewCompat.getTransitionName(name)!!))
+                val url = item?.thumbnail?.path + "." + item?.thumbnail?.extension
+                Log.i(TAG, "url : intent url = $url")
+                intent.putExtra("uri",url)
+                intent.putExtra("name",item?.name)
+                context.startActivity(intent,options.toBundle())
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 
@@ -43,7 +62,7 @@ class CharactersViewHolder(view: View) :
     private fun showRepoData(item: ResultsItem) {
         this.item = item
         name.text = item.name.trim()
-        applyBlur()
+//        applyBlur()
         val url = item.thumbnail.path + "." + item.thumbnail.extension
         val uri = Uri.parse(url)
         Picasso.get()
@@ -66,7 +85,7 @@ class CharactersViewHolder(view: View) :
 
     private fun applyBlur() {
         try {
-            blurBackground.startBlur()
+//            blurBackground.startBlur()
         } catch (e: Exception) {
             e.printStackTrace()
         }

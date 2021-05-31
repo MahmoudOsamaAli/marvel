@@ -29,17 +29,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
+                android:transitionName="example"
                 android:src="@drawable/image_placeholder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <io.alterac.blurkit.BlurLayout
+            <View
                 android:id="@+id/blur_background"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
-                app:blk_blurRadius="20"
+                android:background="@color/black_fade"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -53,6 +54,7 @@
                 android:textSize="@dimen/_14ssp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
+                android:transitionName="name"
                 app:layout_constraintBottom_toBottomOf="@id/blur_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

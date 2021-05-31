@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.marvel">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,10 +11,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Marvel"
+        android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.charactersActivity.CharactersActivity"/>
+        <activity android:name=".ui.characterDetails.CharacterDetailsActivity"/>
+        <activity android:name=".ui.charactersActivity.CharactersActivity" />
         <activity android:name=".ui.splashActivity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
