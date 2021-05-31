@@ -1,12 +1,12 @@
-package com.example.marvel
+package com.example.marvel.ui.charactersActivity.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
+import com.example.marvel.R
 import com.example.marvel.databinding.CharactersLoadStateFooterViewItemBinding
 
 class CharactersLoadStateViewHolder(

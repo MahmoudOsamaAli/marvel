@@ -1,4 +1,4 @@
-package com.example.marvel
+package com.example.marvel.ui.charactersActivity
 
 import android.os.Bundle
 import android.util.Log
@@ -10,9 +10,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.marvel.*
 import com.example.marvel.databinding.ActivityCharactersBinding
+import com.example.marvel.ui.charactersActivity.adapters.CharactersAdapter
+import com.example.marvel.ui.charactersActivity.adapters.CharactersLoadStateAdapter
+import com.example.marvel.ui.searchDialog.SearchDialog
 import com.example.marvel.utils.Extensions.setNoLimitsWindow
 import com.example.marvel.utils.Injection
+import com.example.marvel.viewModels.MainViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChangedBy

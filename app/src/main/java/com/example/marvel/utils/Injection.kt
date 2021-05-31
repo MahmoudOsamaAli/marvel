@@ -1,7 +1,7 @@
 package com.example.marvel.utils
 
 import androidx.lifecycle.ViewModelProvider
-import com.example.marvel.ViewModelFactory
+import com.example.marvel.viewModels.ViewModelFactory
 import com.example.marvel.data.MarvelRepo
 import com.example.marvel.network.MarvelService
 

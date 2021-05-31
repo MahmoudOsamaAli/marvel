@@ -1,4 +1,4 @@
-package com.example.marvel
+package com.example.marvel.ui.charactersActivity.adapters
 
 import android.net.Uri
 import android.util.Log
@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.ViewAnimator
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.marvel.R
 import com.example.marvel.model.ResultsItem
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -54,7 +55,9 @@ class CharactersViewHolder(view: View) :
 
                 override fun onError(e: java.lang.Exception?) {
                     animator.displayedChild = 1
-                    image.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.image_placeholder))
+                    image.setImageDrawable(ContextCompat.getDrawable(context,
+                        R.drawable.image_placeholder
+                    ))
                     e?.printStackTrace()
                     Log.i(TAG, "onError: ${e?.message}")
                 }

@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         app:layoutDescription="@xml/splash_main_xml_constraintlayout_scene"
-        tools:context=".SplashActivity">
+        tools:context=".ui.splashActivity.SplashActivity">
 
         <ImageView
             android:id="@+id/image_background"

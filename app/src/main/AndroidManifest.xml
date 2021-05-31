@@ -14,8 +14,8 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Marvel"
         tools:targetApi="m">
-        <activity android:name=".CharactersActivity"/>
-        <activity android:name=".SplashActivity">
+        <activity android:name=".ui.charactersActivity.CharactersActivity"/>
+        <activity android:name=".ui.splashActivity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

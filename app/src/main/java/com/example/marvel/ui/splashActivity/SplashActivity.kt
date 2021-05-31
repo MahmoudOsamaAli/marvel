@@ -1,4 +1,4 @@
-package com.example.marvel
+package com.example.marvel.ui.splashActivity
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions.bitmapTransform
+import com.example.marvel.R
 import com.example.marvel.databinding.SplashMainBinding
+import com.example.marvel.ui.charactersActivity.CharactersActivity
 import com.example.marvel.utils.Extensions.setNoLimitsWindow
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.coroutines.MainScope
@@ -34,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
 
         MainScope().launch {
             delay(3000)
-            startActivity(Intent(this@SplashActivity,CharactersActivity::class.java))
+            startActivity(Intent(this@SplashActivity, CharactersActivity::class.java))
             finish()
         }
 

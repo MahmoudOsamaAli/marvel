@@ -9,7 +9,7 @@
         android:background="@color/colorPrimaryDark"
         android:fitsSystemWindows="true"
         android:animateLayoutChanges="true"
-        tools:context=".CharactersActivity">
+        tools:context=".ui.charactersActivity.CharactersActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"

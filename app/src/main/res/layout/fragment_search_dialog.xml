@@ -10,7 +10,7 @@
         android:fitsSystemWindows="true"
         android:orientation="horizontal"
         app:layoutDescription="@xml/fragment_search_dialog_xml_constraintlayout2_scene"
-        tools:context=".SearchDialog">
+        tools:context=".ui.searchDialog.SearchDialog">
 
         <LinearLayout
             android:id="@+id/linearLayout"
