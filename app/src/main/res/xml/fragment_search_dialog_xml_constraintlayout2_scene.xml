@@ -7,7 +7,7 @@
         motion:autoTransition="animateToEnd"
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1000">
+        motion:duration="500">
         <KeyFrameSet />
     </Transition>
 
@@ -16,10 +16,10 @@
             android:id="@+id/linearLayout"
             android:layout_width="0dp"
             motion:layout_constraintStart_toEndOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintBottom_toTopOf="parent"
             android:alpha="0"
             android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="?actionBarSize"
+            android:layout_marginTop="0dp"
             android:layout_marginEnd="@dimen/_8sdp"
             android:layout_marginBottom="@dimen/_8sdp"
             />

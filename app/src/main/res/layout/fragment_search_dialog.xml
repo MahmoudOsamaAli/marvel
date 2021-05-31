@@ -16,9 +16,6 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="?actionBarSize"
-            android:layout_marginEnd="@dimen/_8sdp"
             android:elevation="@dimen/_4sdp"
             android:orientation="horizontal"
             >
