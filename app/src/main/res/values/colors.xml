@@ -7,5 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="black_fade">#BF000000</color>
+    <color name="more_black_fade">#CC000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_fade">#A8FFFEFE</color>
+
+    <color name="colorPrimary">#1b1b1b</color>
+    <color name="colorPrimaryDark">#151414</color>
+    <color name="colorAccent">#f1121e</color>
+    <color name="colorAccentLight">#fe888e</color>
+
+
+
 </resources>

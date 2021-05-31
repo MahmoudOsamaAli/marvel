@@ -35,6 +35,7 @@ class SplashActivity : AppCompatActivity() {
         MainScope().launch {
             delay(3000)
             startActivity(Intent(this@SplashActivity,CharactersActivity::class.java))
+            finish()
         }
 
     }
