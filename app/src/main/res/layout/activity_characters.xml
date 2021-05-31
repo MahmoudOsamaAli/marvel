@@ -6,8 +6,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
         android:background="@color/colorPrimaryDark"
+        android:fitsSystemWindows="true"
+        android:animateLayoutChanges="true"
         tools:context=".CharactersActivity">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -15,64 +16,108 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:elevation="@dimen/_4sdp"
             android:background="@drawable/custom_appbar_background"
             android:paddingTop="?actionBarSize"
-            app:layout_constraintStart_toStartOf="parent"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:elevation="@dimen/_4sdp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"
                 android:layout_gravity="center"
+                android:animateLayoutChanges="true"
                 android:gravity="center"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingEnd="@dimen/_16sdp"
                     android:paddingStart="0dp"
-                    >
+                    android:paddingEnd="@dimen/_16sdp">
+
                     <ImageView
                         android:id="@+id/tv_toolbar_title"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_80sdp"
                         android:layout_gravity="center"
-                        android:gravity="center"
                         android:contentDescription="@string/app_name"
+                        android:gravity="center"
                         android:src="@drawable/marvel_logo"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
+                        android:id="@+id/search_button"
                         android:layout_width="@dimen/_32sdp"
                         android:layout_height="@dimen/_32sdp"
-                        android:padding="@dimen/_6sdp"
                         android:background="?android:attr/selectableItemBackground"
                         android:clickable="true"
                         android:focusable="true"
                         android:contentDescription="@string/app_name"
+                        android:padding="@dimen/_6sdp"
+                        android:src="@drawable/ic_magnifying_glass"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:src="@drawable/ic_magnifying_glass"
-                        app:tint="@color/colorAccent"
-                        />
+                        app:tint="@color/colorAccent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <ViewAnimator
+            android:id="@+id/animator"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:animateLayoutChanges="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar"
+            >
 
+            <ProgressBar
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:indeterminateTint="@color/colorAccent"
+                android:layout_gravity="center"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                android:scrollbarThumbVertical="@color/colorAccent"
+                app:layoutManager="LinearLayoutManager"
+                />
+
+            <include
+                android:id="@+id/error_layout"
+                layout="@layout/characters_load_state_footer_view_item"
+                android:layout_marginTop="@dimen/_48sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </ViewAnimator>
+
+        <ImageView
+            android:id="@+id/up_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_circle_up_24"
+            app:tint="@color/colorAccent"
+            android:padding="@dimen/_4sdp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="@dimen/_16sdp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
