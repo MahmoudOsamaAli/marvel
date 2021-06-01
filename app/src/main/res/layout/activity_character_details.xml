@@ -29,7 +29,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/header_card"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_220sdp"
+            android:layout_height="@dimen/_180sdp"
             android:layout_marginTop="-16dp"
             android:animateLayoutChanges="true"
             app:cardBackgroundColor="@android:color/transparent"
@@ -41,13 +41,15 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true">
 
                 <ImageView
-                    android:id="@+id/image"
+                    android:id="@+id/image_header"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
+                    android:src="@drawable/image_placeholder"
                     android:transitionName="example" />
 
                 <ImageButton
@@ -67,7 +69,8 @@
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:paddingBottom="?actionBarSize"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:animateLayoutChanges="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -75,13 +78,15 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true">
 
                 <TextView
                     android:id="@+id/character_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_24sdp"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_24sdp"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_24ssp"
                     android:textStyle="bold"
@@ -95,119 +100,303 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_16sdp"
+                    android:text="@string/description_lbl"
                     android:textColor="@color/colorAccentLight"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold"
                     android:transitionName="name"
                     app:layout_constraintStart_toStartOf="@id/character_name"
-                    app:layout_constraintTop_toBottomOf="@id/character_name"
-                    android:text="@string/description_lbl" />
+                    app:layout_constraintTop_toBottomOf="@id/character_name" />
 
                 <TextView
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/_24sdp"
-                    android:paddingEnd="@dimen/_16ssp"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:paddingEnd="@dimen/_16ssp"
+                    android:text="@string/no_description_found"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12ssp"
                     android:transitionName="name"
                     app:layout_constraintStart_toStartOf="@id/character_name"
-                    app:layout_constraintTop_toBottomOf="@id/description_lbl"
-                    tools:text="@string/dummy_paragraph" />
+                    app:layout_constraintTop_toBottomOf="@id/description_lbl" />
 
                 <TextView
                     android:id="@+id/comics_lbl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_16sdp"
+                    android:text="@string/comics_lbl"
                     android:textColor="@color/colorAccentLight"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold"
                     android:transitionName="name"
                     app:layout_constraintStart_toStartOf="@id/character_name"
-                    app:layout_constraintTop_toBottomOf="@id/description"
-                    android:text="@string/comics_lbl" />
+                    app:layout_constraintTop_toBottomOf="@id/description" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/comics_list"
+                <ViewAnimator
+                    android:id="@+id/comics_animator"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:animateLayoutChanges="true"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/comics_lbl"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:orientation="horizontal"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/comics_lbl">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:animateLayoutChanges="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ProgressBar
+                            style="?android:attr/progressBarStyle"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:indeterminateTint="@color/colorAccent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:text="@string/loading_data"
+                            android:textAlignment="center"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/comics_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/character_details_items_rv" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:gravity="center"
+                        android:text="@string/no_data_found"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+                </ViewAnimator>
 
                 <TextView
                     android:id="@+id/events_lbl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_16sdp"
+                    android:text="@string/events_lbl"
                     android:textColor="@color/colorAccentLight"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold"
                     android:transitionName="name"
                     app:layout_constraintStart_toStartOf="@id/character_name"
-                    app:layout_constraintTop_toBottomOf="@id/comics_list"
-                    android:text="@string/events_lbl" />
+                    app:layout_constraintTop_toBottomOf="@id/comics_animator" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/events_list"
+                <ViewAnimator
+                    android:id="@+id/events_animator"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:animateLayoutChanges="true"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/events_lbl"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:orientation="horizontal"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/events_lbl">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:animateLayoutChanges="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ProgressBar
+                            style="?android:attr/progressBarStyle"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:indeterminateTint="@color/colorAccent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:text="@string/loading_data"
+                            android:textAlignment="center"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/events_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/character_details_items_rv" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:gravity="center"
+                        android:text="@string/no_data_found"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+                </ViewAnimator>
 
                 <TextView
                     android:id="@+id/series_lbl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_16sdp"
+                    android:text="@string/series_lbl"
                     android:textColor="@color/colorAccentLight"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold"
                     android:transitionName="name"
                     app:layout_constraintStart_toStartOf="@id/character_name"
-                    app:layout_constraintTop_toBottomOf="@id/events_list"
-                    android:text="@string/series_lbl" />
+                    app:layout_constraintTop_toBottomOf="@id/events_animator" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/series_list"
+                <ViewAnimator
+                    android:id="@+id/series_animator"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:animateLayoutChanges="true"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/series_lbl"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:orientation="horizontal"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/series_lbl">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:animateLayoutChanges="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ProgressBar
+                            style="?android:attr/progressBarStyle"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:indeterminateTint="@color/colorAccent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:text="@string/loading_data"
+                            android:textAlignment="center"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/series_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/character_details_items_rv" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:gravity="center"
+                        android:text="@string/no_data_found"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+                </ViewAnimator>
 
                 <TextView
                     android:id="@+id/stories_lbl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_16sdp"
+                    android:text="@string/stories_lbl"
                     android:textColor="@color/colorAccentLight"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold"
                     android:transitionName="name"
                     app:layout_constraintStart_toStartOf="@id/character_name"
-                    app:layout_constraintTop_toBottomOf="@id/series_list"
-                    android:text="@string/stories_lbl" />
+                    app:layout_constraintTop_toBottomOf="@id/series_animator" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/stories_list"
+                <ViewAnimator
+                    android:id="@+id/stories_animator"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:animateLayoutChanges="true"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/stories_lbl"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:orientation="horizontal"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/stories_lbl">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:animateLayoutChanges="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ProgressBar
+                            style="?android:attr/progressBarStyle"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:indeterminateTint="@color/colorAccent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:text="@string/loading_data"
+                            android:textAlignment="center"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/stories_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/character_details_items_rv" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:gravity="center"
+                        android:text="@string/no_data_found"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+                </ViewAnimator>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

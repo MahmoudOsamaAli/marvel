@@ -3,7 +3,7 @@ package com.example.marvel.ui.charactersActivity.adapters
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.example.marvel.model.ResultsItem
+import com.example.marvel.model.characters.ResultsItem
 
 /**
  * Adapter for the list of characters.

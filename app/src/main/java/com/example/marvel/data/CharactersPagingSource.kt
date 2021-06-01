@@ -4,16 +4,16 @@ import android.accounts.NetworkErrorException
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.marvel.data.MarvelRepo.Companion.NETWORK_PAGE_SIZE
-import com.example.marvel.model.ResultsItem
+import com.example.marvel.viewModels.MarvelRepo.Companion.NETWORK_PAGE_SIZE
+import com.example.marvel.model.characters.ResultsItem
 import com.example.marvel.network.MarvelService
 import com.example.marvel.utils.NetworkUtils.publicKey
 import com.example.marvel.utils.NetworkUtils.timeStamp
 import java.io.IOException
 
-private const val MARVEL_OFFSET_VALUE = 0
+private const val CHARACTERS_OFFSET_VALUE = 0
 
-class MarvelPagingSource(
+class CharactersPagingSource(
         private val service: MarvelService,
         private val hash: String
 ) : PagingSource<Int, ResultsItem>() {
@@ -26,14 +26,14 @@ class MarvelPagingSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ResultsItem> {
-        val position = params.key ?: MARVEL_OFFSET_VALUE
-        Log.i(TAG, "load: current position = $position")
+        val offset = params.key ?: CHARACTERS_OFFSET_VALUE
+        Log.i(TAG, "load: current position = $offset")
         return try {
-            val response = service.getCharacters(publicKey,NETWORK_PAGE_SIZE,hash,timeStamp,position)
-            val nextKey = if (response.data.count == 0) 0 else position + response.data.count
+            val response = service.getCharacters(publicKey,NETWORK_PAGE_SIZE,hash,timeStamp,offset)
+            val nextKey = if (response.data.count == 0 ||response.data.count < NETWORK_PAGE_SIZE ) null else offset + response.data.count
             LoadResult.Page(
                     data = response.data.results!!,
-                    prevKey = if (position == MARVEL_OFFSET_VALUE) null else position - 1,
+                    prevKey = if (offset == CHARACTERS_OFFSET_VALUE) null else offset - 1,
                     nextKey = nextKey
             )
         }catch (e:IOException){

@@ -15,4 +15,7 @@
     <string name="events_lbl">Events</string>
     <string name="series_lbl">Series</string>
     <string name="stories_lbl">Stories</string>
+    <string name="no_description_found">No Description Found</string>
+    <string name="loading_data">Loading Data</string>
+    <string name="no_data_found">No Data Found</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.marvel.model
+package com.example.marvel.model.characters
 
 data class ResultsItem(val thumbnail: Thumbnail,
                        val urls: List<UrlsItem>?,

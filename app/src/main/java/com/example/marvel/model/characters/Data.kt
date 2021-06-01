@@ -1,4 +1,4 @@
-package com.example.marvel.model
+package com.example.marvel.model.characters
 
 data class Data(val total: Int = 0,
                 val offset: Int = 0,

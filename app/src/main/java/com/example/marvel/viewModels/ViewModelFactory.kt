@@ -2,7 +2,6 @@ package com.example.marvel.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.marvel.data.MarvelRepo
 
 /**
  * Factory for ViewModels

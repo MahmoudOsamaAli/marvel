@@ -75,7 +75,7 @@ class CharactersActivity : AppCompatActivity(){
     }
 
     private fun getData() {
-        loadDataJob = lifecycleScope.launch {
+        lifecycleScope.launch {
             binding.animator.displayedChild = 0
             viewModel.loadDataFromNetwork().collect {
                 adapter.submitData(it)
@@ -110,11 +110,6 @@ class CharactersActivity : AppCompatActivity(){
     private fun setToolBar() {
         setNoLimitsWindow()
         setSupportActionBar(binding.toolbar)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.i(TAG, "onDestroy: adapter = $adapter")
     }
 
     companion object{

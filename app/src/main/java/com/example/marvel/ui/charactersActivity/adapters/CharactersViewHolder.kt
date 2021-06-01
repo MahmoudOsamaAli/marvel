@@ -10,12 +10,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.ViewAnimator
 import androidx.core.app.ActivityOptionsCompat
-import androidx.core.content.ContextCompat
 import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel.R
-import com.example.marvel.model.ResultsItem
+import com.example.marvel.model.characters.ResultsItem
 import com.example.marvel.ui.characterDetails.CharacterDetailsActivity
 import com.example.marvel.ui.charactersActivity.CharactersActivity
 import com.squareup.picasso.Callback
@@ -41,6 +40,7 @@ class CharactersViewHolder(view: View) :
                     Pair.create(name, ViewCompat.getTransitionName(name)!!)
                 )
                 val url = item?.thumbnail?.path + "." + item?.thumbnail?.extension
+                Log.i("init", "image header: $url")
                 intent.putExtra("uri", url)
                 intent.putExtra("name", item?.name)
                 intent.putExtra("id", item?.id)
@@ -60,31 +60,27 @@ class CharactersViewHolder(view: View) :
     private fun showRepoData(item: ResultsItem) {
         this.item = item
         name.text = item.name.trim()
-        val url = item.thumbnail.path + "." + item.thumbnail.extension
-        val uri = Uri.parse(url)
-        Picasso.get()
-            .load(uri)
-            .into(image, object : Callback {
+        if (!item.thumbnail.path.contains("image_not_available")) {
+            val url = item.thumbnail.path + "." + item.thumbnail.extension
+            val uri = Uri.parse(url)
+            Picasso.get().load(uri).into(image, object : Callback {
                 override fun onSuccess() {
                     animator.displayedChild = 1
                 }
 
                 override fun onError(e: java.lang.Exception?) {
                     animator.displayedChild = 1
-                    image.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            context,
-                            R.drawable.image_placeholder
-                        )
-                    )
+                    Picasso.get().load(R.drawable.image_placeholder).into(image)
                     e?.printStackTrace()
-                    Log.i(TAG, "onError: ${e?.message}")
                 }
             })
+        } else {
+            animator.displayedChild = 1
+            Picasso.get().load(R.drawable.image_placeholder).into(image)
+        }
     }
 
     companion object {
-        private const val TAG = "CharactersViewHolder"
         fun create(parent: ViewGroup): CharactersViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.character_item, parent, false)
