@@ -31,7 +31,7 @@ interface MarvelService {
         @Query("apikey") apiKey: String,
         @Query("hash") hash: String,
         @Query("ts") timeStamp: Int,
-    ): CharactersResponse
+    ): CharactersResponse?
 
     @GET("characters/{characterId}/comics")
     suspend fun getComics(

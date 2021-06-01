@@ -18,7 +18,6 @@ import com.example.marvel.ui.searchDialog.SearchDialog
 import com.example.marvel.utils.Extensions.setNoLimitsWindow
 import com.example.marvel.utils.Injection
 import com.example.marvel.viewModels.MainViewModel
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
@@ -31,7 +30,6 @@ class CharactersActivity : AppCompatActivity(){
         ViewModelProvider(this, Injection.provideViewModelFactory())[MainViewModel::class.java]
     }
     private val adapter = CharactersAdapter()
-    private var loadDataJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

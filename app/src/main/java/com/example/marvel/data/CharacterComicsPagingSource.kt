@@ -10,7 +10,7 @@ import com.example.marvel.model.charactersDetails.ResultsItem
 import com.example.marvel.network.MarvelService
 import com.example.marvel.utils.NetworkUtils.publicKey
 import com.example.marvel.utils.NetworkUtils.timeStamp
-import com.example.marvel.viewModels.EndPointType
+import com.example.marvel.utils.NetworkUtils.EndPointType
 import java.io.IOException
 
 private const val CHARACTERS_OFFSET_VALUE = 0

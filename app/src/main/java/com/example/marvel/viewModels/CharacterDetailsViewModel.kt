@@ -17,6 +17,9 @@ class CharacterDetailsViewModel(private val repository: MarvelRepo) : ViewModel(
     private var currentSearchResult: Flow<PagingData<ResultsItem>>? = null
     private val character:MutableLiveData<com.example.marvel.model.characters.ResultsItem> by lazy { MutableLiveData() }
     val characterLiveData:LiveData<com.example.marvel.model.characters.ResultsItem> = character
+    private val selectedItemThumbnail:MutableLiveData<String> by lazy { MutableLiveData() }
+    val selectedItemThumbnailLiveData:LiveData<String> = selectedItemThumbnail
+
     private var characterId: Int = 0
 
     fun setCharacterId(id: Int) {
@@ -27,7 +30,7 @@ class CharacterDetailsViewModel(private val repository: MarvelRepo) : ViewModel(
     fun getCharacterById(){
         viewModelScope.launch {
             val response = repository.getCharacterById(NetworkUtils.getHash(), characterId)
-            character.postValue(response.data.results?.get(0))
+            if (response != null)character.postValue(response.data.results?.get(0))
         }
     }
 
@@ -55,12 +58,8 @@ class CharacterDetailsViewModel(private val repository: MarvelRepo) : ViewModel(
         return newResult
     }
 
-    fun getCharacterStoriesFromNetwork(): Flow<PagingData<ResultsItem>> {
-        val newResult: Flow<PagingData<ResultsItem>> =
-            repository.getCharacterStoriesStream(NetworkUtils.getHash(), characterId)
-                .cachedIn(viewModelScope)
-        currentSearchResult = newResult
-        return newResult
+    fun setSelectedItemThumbnail(url:String){
+        selectedItemThumbnail.value = url
     }
 
     companion object{

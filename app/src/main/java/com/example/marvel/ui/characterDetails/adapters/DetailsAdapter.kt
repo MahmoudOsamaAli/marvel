@@ -3,12 +3,13 @@ package com.example.marvel.ui.characterDetails.adapters
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.example.marvel.callBacks.OnItemClick
 import com.example.marvel.model.charactersDetails.ResultsItem
 
-class DetailsAdapter : PagingDataAdapter<ResultsItem, CharacterDetailsViewHolder>(CHARACTER_COMPARATOR) {
+class DetailsAdapter(private val clickListener:OnItemClick) : PagingDataAdapter<ResultsItem, CharacterDetailsViewHolder>(CHARACTER_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterDetailsViewHolder {
-        return CharacterDetailsViewHolder.create(parent)
+        return CharacterDetailsViewHolder.create(parent,clickListener)
     }
 
     override fun onBindViewHolder(holder: CharacterDetailsViewHolder, position: Int) {

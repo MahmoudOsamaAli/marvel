@@ -27,4 +27,8 @@ object NetworkUtils {
         }
         return ""
     }
+
+    enum class EndPointType {
+        COMICS, EVENTS, SERIES, STORIES
+    }
 }

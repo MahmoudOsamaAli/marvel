@@ -101,7 +101,7 @@
             <include
                 android:id="@+id/error_layout"
                 layout="@layout/characters_load_state_footer_view_item"
-                android:layout_marginTop="@dimen/_48sdp"
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />

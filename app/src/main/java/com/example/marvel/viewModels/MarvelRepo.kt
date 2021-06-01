@@ -1,5 +1,6 @@
 package com.example.marvel.viewModels
 
+import android.accounts.NetworkErrorException
 import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -8,10 +9,11 @@ import com.example.marvel.data.CharactersDetailsPagingSource
 import com.example.marvel.data.CharactersPagingSource
 import com.example.marvel.model.characters.CharactersResponse
 import com.example.marvel.network.MarvelService
-import com.example.marvel.utils.NetworkUtils
+import com.example.marvel.utils.NetworkUtils.EndPointType
 import com.example.marvel.utils.NetworkUtils.publicKey
 import com.example.marvel.utils.NetworkUtils.timeStamp
 import kotlinx.coroutines.flow.Flow
+import java.io.IOException
 
 /**
  * Repository class that works with local and remote data sources.
@@ -91,37 +93,18 @@ class MarvelRepo(private val service: MarvelService) {
         ).flow
     }
 
-    fun getCharacterStoriesStream(
-        hash: String,
-        characterId: Int
-    ): Flow<PagingData<com.example.marvel.model.charactersDetails.ResultsItem>> {
-        Log.i(TAG, "getCharacterStoriesStream: ")
-        return Pager(
-            config = PagingConfig(
-                pageSize = NETWORK_PAGE_SIZE,
-                enablePlaceholders = true
-            ),
-            pagingSourceFactory = {
-                CharactersDetailsPagingSource(
-                    service,
-                    hash,
-                    characterId,
-                    EndPointType.STORIES
-                )
-            }
-        ).flow
-    }
-
-    suspend fun getCharacterById(hash:String,id:Int):CharactersResponse{
-        return service.getCharacterById(id.toString(),publicKey,hash, timeStamp)
+    suspend fun getCharacterById(hash: String, id: Int): CharactersResponse? {
+        return try {
+            service.getCharacterById(id.toString(), publicKey, hash, timeStamp)
+        } catch (ex: IOException) {
+            null
+        } catch (e: NetworkErrorException) {
+            null
+        }
     }
 
     companion object {
         const val NETWORK_PAGE_SIZE = 10
         private const val TAG = "MarvelRepo"
     }
-}
-
-enum class EndPointType {
-    COMICS, EVENTS, SERIES, STORIES
 }
