@@ -8,7 +8,6 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel.R
 import com.example.marvel.databinding.CharactersDetailsLoadStateFooterViewItemBinding
-import com.example.marvel.databinding.CharactersLoadStateFooterViewItemBinding
 
 class CharactersDetailsLoadStateViewHolder(
     private val binding: CharactersDetailsLoadStateFooterViewItemBinding,

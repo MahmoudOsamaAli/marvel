@@ -8,8 +8,6 @@ import com.example.marvel.R
 import com.example.marvel.callBacks.OnItemClick
 import com.example.marvel.databinding.CharacterDetailsItemsRvBinding
 import com.example.marvel.model.charactersDetails.ResultsItem
-import com.example.marvel.ui.DisplayImageDialog
-import com.example.marvel.ui.characterDetails.CharacterDetailsActivity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
