@@ -1,4 +1,4 @@
-package com.example.marvel.ui.charactersActivity.adapters
+package com.example.marvel.ui.characterDetails.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,10 +7,11 @@ import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel.R
+import com.example.marvel.databinding.CharactersDetailsLoadStateFooterViewItemBinding
 import com.example.marvel.databinding.CharactersLoadStateFooterViewItemBinding
 
-class CharactersLoadStateViewHolder(
-    private val binding: CharactersLoadStateFooterViewItemBinding,
+class CharactersDetailsLoadStateViewHolder(
+    private val binding: CharactersDetailsLoadStateFooterViewItemBinding,
     retry: () -> Unit,
     private val context: Context
 ) : RecyclerView.ViewHolder(binding.root) {
@@ -29,11 +30,11 @@ class CharactersLoadStateViewHolder(
     }
 
     companion object {
-        fun create(parent: ViewGroup, retry: () -> Unit): CharactersLoadStateViewHolder {
+        fun create(parent: ViewGroup, retry: () -> Unit): CharactersDetailsLoadStateViewHolder {
             val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.characters_load_state_footer_view_item, parent, false)
-            val binding = CharactersLoadStateFooterViewItemBinding.bind(view)
-            return CharactersLoadStateViewHolder(binding, retry,view.context)
+                    .inflate(R.layout.characters_details_load_state_footer_view_item, parent, false)
+            val binding = CharactersDetailsLoadStateFooterViewItemBinding.bind(view)
+            return CharactersDetailsLoadStateViewHolder(binding, retry,view.context)
         }
     }
 }

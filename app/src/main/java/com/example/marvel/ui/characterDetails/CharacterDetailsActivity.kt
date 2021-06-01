@@ -15,8 +15,8 @@ import com.example.marvel.callBacks.OnItemClick
 import com.example.marvel.databinding.ActivityCharacterDetailsBinding
 import com.example.marvel.model.charactersDetails.ResultsItem
 import com.example.marvel.ui.DisplayImageDialog
+import com.example.marvel.ui.characterDetails.adapters.CharactersDetailsLoadStateAdapter
 import com.example.marvel.ui.characterDetails.adapters.DetailsAdapter
-import com.example.marvel.ui.charactersActivity.adapters.CharactersLoadStateAdapter
 import com.example.marvel.utils.Extensions.setNoLimitsWindow
 import com.example.marvel.utils.Injection
 import com.example.marvel.viewModels.CharacterDetailsViewModel
@@ -27,7 +27,7 @@ import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
-class CharacterDetailsActivity : AppCompatActivity() ,OnItemClick{
+class CharacterDetailsActivity : AppCompatActivity(), OnItemClick {
 
     private lateinit var binding: ActivityCharacterDetailsBinding
     private val viewModel: CharacterDetailsViewModel by lazy {
@@ -36,10 +36,10 @@ class CharacterDetailsActivity : AppCompatActivity() ,OnItemClick{
             Injection.provideViewModelFactory()
         )[CharacterDetailsViewModel::class.java]
     }
-    private val comicsAdapter = DetailsAdapter(this)
-    private val eventsAdapter = DetailsAdapter(this)
-    private val seriesAdapter = DetailsAdapter(this)
-    private val storiesAdapter= DetailsAdapter(this)
+    private val comicsAdapter by lazy { DetailsAdapter(this) }
+    private val eventsAdapter by lazy { DetailsAdapter(this) }
+    private val seriesAdapter by lazy { DetailsAdapter(this) }
+    private val storiesAdapter by lazy { DetailsAdapter(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,7 +83,7 @@ class CharacterDetailsActivity : AppCompatActivity() ,OnItemClick{
                 binding.comicsAnimator.displayedChild = 1
             } else if (it.refresh is LoadState.NotLoading && comicsAdapter.itemCount == 0) {
                 binding.comicsAnimator.displayedChild = 2
-            }else if(it.refresh is LoadState.Error){
+            } else if (it.refresh is LoadState.Error) {
                 binding.comicsAnimator.displayedChild = 2
             }
         }
@@ -93,7 +93,7 @@ class CharacterDetailsActivity : AppCompatActivity() ,OnItemClick{
                 binding.eventsAnimator.displayedChild = 1
             } else if (it.refresh is LoadState.NotLoading && eventsAdapter.itemCount == 0) {
                 binding.eventsAnimator.displayedChild = 2
-            }else if(it.refresh is LoadState.Error){
+            } else if (it.refresh is LoadState.Error) {
                 binding.eventsAnimator.displayedChild = 2
             }
         }
@@ -103,7 +103,7 @@ class CharacterDetailsActivity : AppCompatActivity() ,OnItemClick{
                 binding.seriesAnimator.displayedChild = 1
             } else if (it.refresh is LoadState.NotLoading && seriesAdapter.itemCount == 0) {
                 binding.seriesAnimator.displayedChild = 2
-            }else if(it.refresh is LoadState.Error){
+            } else if (it.refresh is LoadState.Error) {
                 binding.seriesAnimator.displayedChild = 2
             }
         }
@@ -113,7 +113,7 @@ class CharacterDetailsActivity : AppCompatActivity() ,OnItemClick{
                 binding.storiesAnimator.displayedChild = 1
             } else if (it.refresh is LoadState.NotLoading && storiesAdapter.itemCount == 0) {
                 binding.storiesAnimator.displayedChild = 2
-            }else if(it.refresh is LoadState.Error){
+            } else if (it.refresh is LoadState.Error) {
                 binding.storiesAnimator.displayedChild = 2
             }
         }
@@ -124,7 +124,7 @@ class CharacterDetailsActivity : AppCompatActivity() ,OnItemClick{
         val url: String? = intent.getStringExtra("uri")
         val name: String? = intent.getStringExtra("name")
         val id: Int = intent.getIntExtra("id", 0)
-        if (!url.isNullOrEmpty() &&!url.contains("image_not_available")) setImages(url)
+        if (!url.isNullOrEmpty() && !url.contains("image_not_available")) setImages(url)
         binding.characterName.text = name
         viewModel.setCharacterId(id)
     }
@@ -143,20 +143,20 @@ class CharacterDetailsActivity : AppCompatActivity() ,OnItemClick{
 
     private fun initAdapters() {
         binding.comicsList.adapter = comicsAdapter.withLoadStateHeaderAndFooter(
-            header = CharactersLoadStateAdapter { comicsAdapter.retry() },
-            footer = CharactersLoadStateAdapter { comicsAdapter.retry() }
+            header = CharactersDetailsLoadStateAdapter { comicsAdapter.retry() },
+            footer = CharactersDetailsLoadStateAdapter { comicsAdapter.retry() }
         )
         binding.eventsList.adapter = eventsAdapter.withLoadStateHeaderAndFooter(
-            header = CharactersLoadStateAdapter { eventsAdapter.retry() },
-            footer = CharactersLoadStateAdapter { eventsAdapter.retry() }
+            header = CharactersDetailsLoadStateAdapter { eventsAdapter.retry() },
+            footer = CharactersDetailsLoadStateAdapter { eventsAdapter.retry() }
         )
         binding.seriesList.adapter = seriesAdapter.withLoadStateHeaderAndFooter(
-            header = CharactersLoadStateAdapter { seriesAdapter.retry() },
-            footer = CharactersLoadStateAdapter { seriesAdapter.retry() }
+            header = CharactersDetailsLoadStateAdapter { seriesAdapter.retry() },
+            footer = CharactersDetailsLoadStateAdapter { seriesAdapter.retry() }
         )
         binding.storiesList.adapter = storiesAdapter.withLoadStateHeaderAndFooter(
-            header = CharactersLoadStateAdapter { storiesAdapter.retry() },
-            footer = CharactersLoadStateAdapter { storiesAdapter.retry() }
+            header = CharactersDetailsLoadStateAdapter { storiesAdapter.retry() },
+            footer = CharactersDetailsLoadStateAdapter { storiesAdapter.retry() }
         )
     }
 
@@ -200,6 +200,6 @@ class CharacterDetailsActivity : AppCompatActivity() ,OnItemClick{
         val url = item.thumbnail.path + "." + item.thumbnail.extension
         viewModel.setSelectedItemThumbnail(url)
         val dialog = DisplayImageDialog()
-        dialog.show(supportFragmentManager,dialog.tag)
+        dialog.show(supportFragmentManager, dialog.tag)
     }
 }
