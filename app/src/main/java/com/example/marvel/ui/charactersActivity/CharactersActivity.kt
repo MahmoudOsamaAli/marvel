@@ -1,8 +1,12 @@
 package com.example.marvel.ui.charactersActivity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
+import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -11,7 +15,11 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel.*
+import com.example.marvel.callBacks.OnCharacterClicked
 import com.example.marvel.databinding.ActivityCharactersBinding
+import com.example.marvel.databinding.CharacterItemBinding
+import com.example.marvel.model.characters.ResultsItem
+import com.example.marvel.ui.characterDetails.CharacterDetailsActivity
 import com.example.marvel.ui.charactersActivity.adapters.CharactersAdapter
 import com.example.marvel.ui.charactersActivity.adapters.CharactersLoadStateAdapter
 import com.example.marvel.ui.searchDialog.SearchDialog
@@ -19,17 +27,15 @@ import com.example.marvel.utils.Extensions.setNoLimitsWindow
 import com.example.marvel.utils.Injection
 import com.example.marvel.viewModels.MainViewModel
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.distinctUntilChangedBy
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
-class CharactersActivity : AppCompatActivity(){
+class CharactersActivity : AppCompatActivity(), OnCharacterClicked {
 
     private lateinit var binding: ActivityCharactersBinding
-    private val viewModel: MainViewModel by lazy{
+    private val viewModel: MainViewModel by lazy {
         ViewModelProvider(this, Injection.provideViewModelFactory())[MainViewModel::class.java]
     }
-    private val adapter = CharactersAdapter()
+    private val adapter = CharactersAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,27 +52,18 @@ class CharactersActivity : AppCompatActivity(){
     }
 
     private fun initLoading() {
-        // Scroll to top when the list is refreshed from network.
-        lifecycleScope.launch {
-            adapter.loadStateFlow
-                // Only emit when REFRESH LoadState for RemoteMediator changes.
-                .distinctUntilChangedBy { it.refresh }
-                // Only react to cases where Remote REFRESH completes i.e., NotLoading.
-                .filter { it.refresh is LoadState.NotLoading }
-
-            adapter.addLoadStateListener {
-                if (it.refresh is LoadState.NotLoading && adapter.itemCount > 0){
-                    Log.i(TAG, "initLoading: ")
-                    binding.animator.displayedChild = 1
-                }
-                if (it.refresh is LoadState.Error){
-                    Log.i(TAG, "initLoading: error")
-                    binding.animator.displayedChild = 2
-                    binding.errorLayout.progressBar.isVisible = false
-                    binding.errorLayout.errorMsg.text = resources.getString(R.string.error_loading)
-                    binding.errorLayout.retryButton.setOnClickListener {
-                        getData()
-                    }
+        adapter.addLoadStateListener {
+            if (it.refresh is LoadState.NotLoading && adapter.itemCount > 0) {
+                Log.i(TAG, "initLoading: ")
+                binding.animator.displayedChild = 1
+            }
+            if (it.refresh is LoadState.Error) {
+                Log.i(TAG, "initLoading: error")
+                binding.animator.displayedChild = 2
+                binding.errorLayout.progressBar.isVisible = false
+                binding.errorLayout.errorMsg.text = resources.getString(R.string.error_loading)
+                binding.errorLayout.retryButton.setOnClickListener {
+                    getData()
                 }
             }
         }
@@ -99,7 +96,7 @@ class CharactersActivity : AppCompatActivity(){
                 val position =
                     (recyclerView.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
                 binding.upButton.isVisible = dy <= 0
-                binding.upButton.isVisible =  position != 0
+                binding.upButton.isVisible = position != 0
             }
         })
         binding.upButton.setOnClickListener { binding.list.smoothScrollToPosition(0) }
@@ -110,7 +107,23 @@ class CharactersActivity : AppCompatActivity(){
         setSupportActionBar(binding.toolbar)
     }
 
-    companion object{
+    override fun onItemClicked(item: Any, binding: Any) {
+        item as ResultsItem
+        binding as CharacterItemBinding
+        val intent = Intent(this, CharacterDetailsActivity::class.java)
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this,
+            Pair.create(binding.characterImage, ViewCompat.getTransitionName(binding.characterImage)!!),
+            Pair.create(binding.characterImage, ViewCompat.getTransitionName(binding.characterImage)!!)
+        )
+        val url = item.thumbnail.path + "." + item.thumbnail.extension
+        intent.putExtra("uri", url)
+        intent.putExtra("name", item.name)
+        intent.putExtra("id", item.id)
+        startActivity(intent, options.toBundle())
+    }
+
+    companion object {
         private const val TAG = "CharactersActivity"
     }
 }

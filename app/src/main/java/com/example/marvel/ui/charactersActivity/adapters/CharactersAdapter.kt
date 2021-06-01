@@ -3,15 +3,13 @@ package com.example.marvel.ui.charactersActivity.adapters
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.example.marvel.callBacks.OnCharacterClicked
 import com.example.marvel.model.characters.ResultsItem
 
-/**
- * Adapter for the list of characters.
- */
-class CharactersAdapter : PagingDataAdapter<ResultsItem, CharactersViewHolder>(CHARACTER_COMPARATOR) {
+class CharactersAdapter(private val clickListener: OnCharacterClicked) : PagingDataAdapter<ResultsItem, CharactersViewHolder>(CHARACTER_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
-        return CharactersViewHolder.create(parent)
+        return CharactersViewHolder.create(parent,clickListener)
     }
 
     override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {

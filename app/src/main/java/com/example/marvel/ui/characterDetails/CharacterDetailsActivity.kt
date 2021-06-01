@@ -23,8 +23,6 @@ import com.example.marvel.viewModels.CharacterDetailsViewModel
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.splash_main.*
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.distinctUntilChangedBy
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 class CharacterDetailsActivity : AppCompatActivity(), OnItemClick {
@@ -57,27 +55,6 @@ class CharacterDetailsActivity : AppCompatActivity(), OnItemClick {
     }
 
     private fun initLoading() {
-        lifecycleScope.launch {
-            comicsAdapter.loadStateFlow
-                .distinctUntilChangedBy { it.refresh }
-                .filter { it.refresh is LoadState.NotLoading }
-        }
-        lifecycleScope.launch {
-            eventsAdapter.loadStateFlow
-                .distinctUntilChangedBy { it.refresh }
-                .filter { it.refresh is LoadState.NotLoading }
-        }
-        lifecycleScope.launch {
-            seriesAdapter.loadStateFlow
-                .distinctUntilChangedBy { it.refresh }
-                .filter { it.refresh is LoadState.NotLoading }
-        }
-        lifecycleScope.launch {
-            storiesAdapter.loadStateFlow
-                .distinctUntilChangedBy { it.refresh }
-                .filter { it.refresh is LoadState.NotLoading }
-        }
-
         comicsAdapter.addLoadStateListener {
             if (it.refresh is LoadState.NotLoading && comicsAdapter.itemCount > 0) {
                 binding.comicsAnimator.displayedChild = 1
@@ -117,7 +94,6 @@ class CharacterDetailsActivity : AppCompatActivity(), OnItemClick {
                 binding.storiesAnimator.displayedChild = 2
             }
         }
-
     }
 
     private fun getIntentData() {
@@ -191,15 +167,15 @@ class CharacterDetailsActivity : AppCompatActivity(), OnItemClick {
         }
     }
 
-    companion object {
-        private const val TAG = "CharacterDetailsActivit"
-    }
-
     override fun onItemClick(item: Any) {
         item as ResultsItem
         val url = item.thumbnail.path + "." + item.thumbnail.extension
         viewModel.setSelectedItemThumbnail(url)
         val dialog = DisplayImageDialog()
         dialog.show(supportFragmentManager, dialog.tag)
+    }
+
+    companion object {
+        private const val TAG = "CharacterDetailsActivit"
     }
 }
