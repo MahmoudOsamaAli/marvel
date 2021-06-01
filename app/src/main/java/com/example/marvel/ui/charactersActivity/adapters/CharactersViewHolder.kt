@@ -27,7 +27,6 @@ class CharactersViewHolder(view: View) :
     RecyclerView.ViewHolder(view) {
 
     private val name: TextView = view.findViewById(R.id.character_name)
-//    private val blurBackground: BlurLayout = view.findViewById(R.id.blur_background)
     private val image: ImageView = view.findViewById(R.id.character_image)
     private val animator: ViewAnimator = view.findViewById(R.id.animator)
     private val context = view.context
@@ -37,16 +36,17 @@ class CharactersViewHolder(view: View) :
     init {
         view.setOnClickListener {
             try {
-                val intent = Intent(context,CharacterDetailsActivity::class.java)
-//                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as CharactersActivity,image,ViewCompat.getTransitionName(image)!!)
-                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as CharactersActivity
-                    ,Pair.create(image,ViewCompat.getTransitionName(image)!!)
-                    ,Pair.create(name,ViewCompat.getTransitionName(name)!!))
+                val intent = Intent(context, CharacterDetailsActivity::class.java)
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    context as CharactersActivity,
+                    Pair.create(image, ViewCompat.getTransitionName(image)!!),
+                    Pair.create(name, ViewCompat.getTransitionName(name)!!)
+                )
                 val url = item?.thumbnail?.path + "." + item?.thumbnail?.extension
-                Log.i(TAG, "url : intent url = $url")
-                intent.putExtra("uri",url)
-                intent.putExtra("name",item?.name)
-                context.startActivity(intent,options.toBundle())
+                intent.putExtra("uri", url)
+                intent.putExtra("name", item?.name)
+                intent.putExtra("id", item?.id)
+                context.startActivity(intent, options.toBundle())
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -62,7 +62,6 @@ class CharactersViewHolder(view: View) :
     private fun showRepoData(item: ResultsItem) {
         this.item = item
         name.text = item.name.trim()
-//        applyBlur()
         val url = item.thumbnail.path + "." + item.thumbnail.extension
         val uri = Uri.parse(url)
         Picasso.get()
@@ -74,21 +73,16 @@ class CharactersViewHolder(view: View) :
 
                 override fun onError(e: java.lang.Exception?) {
                     animator.displayedChild = 1
-                    image.setImageDrawable(ContextCompat.getDrawable(context,
-                        R.drawable.image_placeholder
-                    ))
+                    image.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            context,
+                            R.drawable.image_placeholder
+                        )
+                    )
                     e?.printStackTrace()
                     Log.i(TAG, "onError: ${e?.message}")
                 }
             })
-    }
-
-    private fun applyBlur() {
-        try {
-//            blurBackground.startBlur()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 
     companion object {

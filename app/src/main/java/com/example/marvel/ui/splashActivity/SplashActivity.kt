@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
 
         Glide.with(this)
             .load(R.drawable.mcu_background)
-            .apply(bitmapTransform(BlurTransformation(22,5)))
+            .apply(bitmapTransform(BlurTransformation(10,5)))
             .into(binding.imageBackground)
 
         MainScope().launch {

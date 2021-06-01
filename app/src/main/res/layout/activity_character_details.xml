@@ -2,37 +2,83 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        tools:background="@color/colorPrimaryDark"
         android:fitsSystemWindows="true"
-        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical"
         tools:context=".ui.characterDetails.CharacterDetailsActivity">
 
+
         <ImageView
-            android:id="@+id/image"
+            android:id="@+id/backgound_image"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
-            android:transitionName="example"
+            android:layout_height="match_parent"
+            android:src="@drawable/mcu_background"
             android:scaleType="centerCrop"
-            android:background="@drawable/custom_appbar_background"
+            />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/more_black_fade" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/header_card"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_220sdp"
+            android:layout_marginTop="-16dp"
+            android:animateLayoutChanges="true"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="@dimen/_16sdp"
+            app:cardElevation="@dimen/_8sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:transitionName="example" />
+
+                <ImageButton
+                    android:id="@+id/back_button"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginTop="?actionBarSize"
+                    android:background="@drawable/custom_button_background"
+                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/character_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image"
-            android:transitionName="name"
+            android:layout_margin="@dimen/_24sdp"
+            android:textColor="@color/white"
             android:textSize="@dimen/_20ssp"
             android:textStyle="bold"
-            android:textColor="@color/white"
+            android:transitionName="name"
             tools:text="Ultron"
-            android:layout_margin="@dimen/_24sdp"/>
-
+            app:layout_constraintTop_toBottomOf="@id/header_card"
+            app:layout_constraintStart_toStartOf="parent"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

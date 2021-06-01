@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.marvel.R
 import com.example.marvel.databinding.ActivityCharacterDetailsBinding
 import com.example.marvel.utils.Extensions.setNoLimitsWindow
-import com.squareup.picasso.Picasso
+import jp.wasabeef.glide.transformations.BlurTransformation
 
 class CharacterDetailsActivity : AppCompatActivity() {
 
@@ -21,8 +23,9 @@ class CharacterDetailsActivity : AppCompatActivity() {
         init()
     }
 
-    private fun init(){
+    private fun init() {
         getIntentData()
+        binding.backButton.setOnClickListener { onBackPressed() }
     }
 
     private fun getIntentData() {
@@ -30,15 +33,21 @@ class CharacterDetailsActivity : AppCompatActivity() {
         val name: String? = intent.getStringExtra("name")
         Log.i(TAG, "onCreate: url = $url")
         if (!url.isNullOrEmpty()) {
-            Picasso.get()
+
+            Glide.with(this)
                 .load(Uri.parse(url))
                 .into(binding.image)
+
+            Glide.with(this)
+                .load(Uri.parse(url))
+                .apply(RequestOptions.bitmapTransform(BlurTransformation(22, 5)))
+                .into(binding.backgoundImage)
 
             binding.characterName.text = name
         }
     }
 
-    companion object{
+    companion object {
         private const val TAG = "CharacterDetailsActivit"
     }
 }
