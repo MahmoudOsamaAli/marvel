@@ -20,8 +20,6 @@ import com.example.marvel.ui.characterDetails.CharacterDetailsActivity
 import com.example.marvel.ui.charactersActivity.CharactersActivity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import io.alterac.blurkit.BlurLayout
-
 
 class CharactersViewHolder(view: View) :
     RecyclerView.ViewHolder(view) {

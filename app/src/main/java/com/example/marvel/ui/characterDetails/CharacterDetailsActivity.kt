@@ -5,16 +5,23 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.marvel.R
 import com.example.marvel.databinding.ActivityCharacterDetailsBinding
 import com.example.marvel.utils.Extensions.setNoLimitsWindow
+import com.example.marvel.utils.Injection
+import com.example.marvel.viewModels.CharacterDetailsViewModel
+import com.example.marvel.viewModels.MainViewModel
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 class CharacterDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCharacterDetailsBinding
+    private val viewModel: CharacterDetailsViewModel by lazy{
+        ViewModelProvider(this, Injection.provideViewModelFactory())[CharacterDetailsViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

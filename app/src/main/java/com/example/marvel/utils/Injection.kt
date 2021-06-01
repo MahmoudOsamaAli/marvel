@@ -7,11 +7,8 @@ import com.example.marvel.network.MarvelService
 
 object Injection {
 
-    private fun provideMarvelRepository(): MarvelRepo {
-        return MarvelRepo(MarvelService.create())
-    }
+    private fun provideMarvelRepository(): MarvelRepo = MarvelRepo(MarvelService.create())
 
-    fun provideViewModelFactory(): ViewModelProvider.Factory {
-        return ViewModelFactory(provideMarvelRepository())
-    }
+    fun provideViewModelFactory(): ViewModelProvider.Factory = ViewModelFactory(provideMarvelRepository())
+
 }

@@ -7,9 +7,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        tools:background="@color/colorPrimaryDark"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
+        tools:background="@color/colorPrimaryDark"
         tools:context=".ui.characterDetails.CharacterDetailsActivity">
 
 
@@ -17,9 +17,8 @@
             android:id="@+id/backgound_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/mcu_background"
             android:scaleType="centerCrop"
-            />
+            android:src="@drawable/mcu_background" />
 
         <View
             android:id="@+id/view"
@@ -36,10 +35,9 @@
             app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="@dimen/_16sdp"
             app:cardElevation="@dimen/_8sdp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            >
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -66,19 +64,153 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:id="@+id/character_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_24sdp"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_20ssp"
-            android:textStyle="bold"
-            android:transitionName="name"
-            tools:text="Ultron"
-            app:layout_constraintTop_toBottomOf="@id/header_card"
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingBottom="?actionBarSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintTop_toBottomOf="@id/header_card">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/character_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_24sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_24ssp"
+                    android:textStyle="bold"
+                    android:transitionName="name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Ultron" />
+
+                <TextView
+                    android:id="@+id/description_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:textColor="@color/colorAccentLight"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold"
+                    android:transitionName="name"
+                    app:layout_constraintStart_toStartOf="@id/character_name"
+                    app:layout_constraintTop_toBottomOf="@id/character_name"
+                    android:text="@string/description_lbl" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/_24sdp"
+                    android:paddingEnd="@dimen/_16ssp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp"
+                    android:transitionName="name"
+                    app:layout_constraintStart_toStartOf="@id/character_name"
+                    app:layout_constraintTop_toBottomOf="@id/description_lbl"
+                    tools:text="@string/dummy_paragraph" />
+
+                <TextView
+                    android:id="@+id/comics_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:textColor="@color/colorAccentLight"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold"
+                    android:transitionName="name"
+                    app:layout_constraintStart_toStartOf="@id/character_name"
+                    app:layout_constraintTop_toBottomOf="@id/description"
+                    android:text="@string/comics_lbl" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/comics_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/comics_lbl"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:orientation="horizontal"/>
+
+                <TextView
+                    android:id="@+id/events_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:textColor="@color/colorAccentLight"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold"
+                    android:transitionName="name"
+                    app:layout_constraintStart_toStartOf="@id/character_name"
+                    app:layout_constraintTop_toBottomOf="@id/comics_list"
+                    android:text="@string/events_lbl" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/events_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/events_lbl"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:orientation="horizontal"/>
+
+                <TextView
+                    android:id="@+id/series_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:textColor="@color/colorAccentLight"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold"
+                    android:transitionName="name"
+                    app:layout_constraintStart_toStartOf="@id/character_name"
+                    app:layout_constraintTop_toBottomOf="@id/events_list"
+                    android:text="@string/series_lbl" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/series_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/series_lbl"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:orientation="horizontal"/>
+
+                <TextView
+                    android:id="@+id/stories_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:textColor="@color/colorAccentLight"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold"
+                    android:transitionName="name"
+                    app:layout_constraintStart_toStartOf="@id/character_name"
+                    app:layout_constraintTop_toBottomOf="@id/series_list"
+                    android:text="@string/stories_lbl" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/stories_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/stories_lbl"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:orientation="horizontal"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

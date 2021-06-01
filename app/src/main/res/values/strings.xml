@@ -9,4 +9,10 @@
     <string name="error_loading">Couldn\'t load data..
         \n
         please try again and check your network</string>
+    <string name="dummy_paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dolorem ducimus error excepturi magnam nesciunt odit praesentium quam soluta totam.</string>
+    <string name="description_lbl">Description</string>
+    <string name="comics_lbl">Comics</string>
+    <string name="events_lbl">Events</string>
+    <string name="series_lbl">Series</string>
+    <string name="stories_lbl">Stories</string>
 </resources>

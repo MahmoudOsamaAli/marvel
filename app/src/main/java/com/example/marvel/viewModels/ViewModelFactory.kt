@@ -13,6 +13,9 @@ class ViewModelFactory(private val repository: MarvelRepo) : ViewModelProvider.F
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return MainViewModel(repository) as T
+        }else if (modelClass.isAssignableFrom(CharacterDetailsViewModel::class.java)){
+            @Suppress("UNCHECKED_CAST")
+            return CharacterDetailsViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
