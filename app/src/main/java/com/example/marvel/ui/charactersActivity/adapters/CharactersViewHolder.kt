@@ -18,7 +18,7 @@ class CharactersViewHolder(private val binding: CharacterItemBinding, private va
 
     init {
         binding.root.setOnClickListener {
-            clickListener.onItemClicked(item,binding)
+            clickListener.onItemClicked(item,binding.characterImage)
         }
     }
 

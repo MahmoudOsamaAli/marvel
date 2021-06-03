@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 
 class CharacterDetailsViewModel(private val repository: MarvelRepo) : ViewModel() {
 
-    private var currentSearchResult: Flow<PagingData<ResultsItem>>? = null
     private val character:MutableLiveData<com.example.marvel.model.characters.ResultsItem> by lazy { MutableLiveData() }
     val characterLiveData:LiveData<com.example.marvel.model.characters.ResultsItem> = character
     private val selectedItemThumbnail:MutableLiveData<String> by lazy { MutableLiveData() }
@@ -35,27 +34,18 @@ class CharacterDetailsViewModel(private val repository: MarvelRepo) : ViewModel(
     }
 
     fun getCharacterComicsFromNetwork(): Flow<PagingData<ResultsItem>> {
-        val newResult: Flow<PagingData<ResultsItem>> =
-            repository.getCharacterComicsStream(NetworkUtils.getHash(), characterId)
-                .cachedIn(viewModelScope)
-        currentSearchResult = newResult
-        return newResult
+        return repository.getCharacterComicsStream(NetworkUtils.getHash(), characterId)
+            .cachedIn(viewModelScope)
     }
 
     fun getCharacterEventsFromNetwork(): Flow<PagingData<ResultsItem>> {
-        val newResult: Flow<PagingData<ResultsItem>> =
-            repository.getCharacterEventsStream(NetworkUtils.getHash(), characterId)
-                .cachedIn(viewModelScope)
-        currentSearchResult = newResult
-        return newResult
+        return repository.getCharacterEventsStream(NetworkUtils.getHash(), characterId)
+            .cachedIn(viewModelScope)
     }
 
     fun getCharacterSeriesFromNetwork(): Flow<PagingData<ResultsItem>> {
-        val newResult: Flow<PagingData<ResultsItem>> =
-            repository.getCharacterSeriesStream(NetworkUtils.getHash(), characterId)
-                .cachedIn(viewModelScope)
-        currentSearchResult = newResult
-        return newResult
+        return repository.getCharacterSeriesStream(NetworkUtils.getHash(), characterId)
+            .cachedIn(viewModelScope)
     }
 
     fun setSelectedItemThumbnail(url:String){

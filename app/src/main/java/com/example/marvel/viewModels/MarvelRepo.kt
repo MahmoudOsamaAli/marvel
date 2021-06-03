@@ -104,7 +104,7 @@ class MarvelRepo(private val service: MarvelService) {
     }
 
     companion object {
-        const val NETWORK_PAGE_SIZE = 10
+        const val NETWORK_PAGE_SIZE = 20
         private const val TAG = "MarvelRepo"
     }
 }

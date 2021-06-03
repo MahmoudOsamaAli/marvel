@@ -1,12 +1,8 @@
 package com.example.marvel.ui.charactersActivity
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
-import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -17,12 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel.*
 import com.example.marvel.callBacks.OnCharacterClicked
 import com.example.marvel.databinding.ActivityCharactersBinding
-import com.example.marvel.databinding.CharacterItemBinding
 import com.example.marvel.model.characters.ResultsItem
-import com.example.marvel.ui.characterDetails.CharacterDetailsActivity
 import com.example.marvel.ui.charactersActivity.adapters.CharactersAdapter
 import com.example.marvel.ui.charactersActivity.adapters.CharactersLoadStateAdapter
-import com.example.marvel.ui.searchDialog.SearchDialog
+import com.example.marvel.ui.dialogs.SearchDialog
 import com.example.marvel.utils.Extensions.setNoLimitsWindow
 import com.example.marvel.utils.Injection
 import com.example.marvel.viewModels.MainViewModel
@@ -54,11 +48,10 @@ class CharactersActivity : AppCompatActivity(), OnCharacterClicked {
     private fun initLoading() {
         adapter.addLoadStateListener {
             if (it.refresh is LoadState.NotLoading && adapter.itemCount > 0) {
-                Log.i(TAG, "initLoading: ")
                 binding.animator.displayedChild = 1
+                viewModel.charactersList.value = ArrayList(adapter.snapshot().items)
             }
             if (it.refresh is LoadState.Error) {
-                Log.i(TAG, "initLoading: error")
                 binding.animator.displayedChild = 2
                 binding.errorLayout.progressBar.isVisible = false
                 binding.errorLayout.errorMsg.text = resources.getString(R.string.error_loading)
@@ -107,23 +100,8 @@ class CharactersActivity : AppCompatActivity(), OnCharacterClicked {
         setSupportActionBar(binding.toolbar)
     }
 
-    override fun onItemClicked(item: Any, binding: Any) {
-        item as ResultsItem
-        binding as CharacterItemBinding
-        val intent = Intent(this, CharacterDetailsActivity::class.java)
-        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-            this,
-            Pair.create(binding.characterImage, ViewCompat.getTransitionName(binding.characterImage)!!),
-            Pair.create(binding.characterImage, ViewCompat.getTransitionName(binding.characterImage)!!)
-        )
-        val url = item.thumbnail.path + "." + item.thumbnail.extension
-        intent.putExtra("uri", url)
-        intent.putExtra("name", item.name)
-        intent.putExtra("id", item.id)
-        startActivity(intent, options.toBundle())
+    override fun onItemClicked(item: ResultsItem, view: View) {
+        viewModel.startCharactersDetailedActivity(item,view,this)
     }
 
-    companion object {
-        private const val TAG = "CharactersActivity"
-    }
 }

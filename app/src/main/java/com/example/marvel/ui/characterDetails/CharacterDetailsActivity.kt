@@ -14,7 +14,7 @@ import com.example.marvel.R
 import com.example.marvel.callBacks.OnItemClick
 import com.example.marvel.databinding.ActivityCharacterDetailsBinding
 import com.example.marvel.model.charactersDetails.ResultsItem
-import com.example.marvel.ui.DisplayImageDialog
+import com.example.marvel.ui.dialogs.DisplayImageDialog
 import com.example.marvel.ui.characterDetails.adapters.CharactersDetailsLoadStateAdapter
 import com.example.marvel.ui.characterDetails.adapters.DetailsAdapter
 import com.example.marvel.utils.Extensions.setNoLimitsWindow

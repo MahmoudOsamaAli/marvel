@@ -1,4 +1,4 @@
-package com.example.marvel.ui
+package com.example.marvel.ui.dialogs
 
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri

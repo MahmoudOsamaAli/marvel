@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/_8sdp"
+        app:cardCornerRadius="@dimen/_16sdp"
+        android:layout_margin="@dimen/_8sdp"
+        app:cardBackgroundColor="@color/colorPrimary"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            >
+            <ImageView
+                android:id="@+id/character_image"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_70sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="centerCrop"
+                android:transitionName="example"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:src="@drawable/mcu_background"/>
+
+            <TextView
+                android:id="@+id/character_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:transitionName="name"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/character_image"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="3-D Man" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
