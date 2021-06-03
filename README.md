@@ -4,7 +4,7 @@ it's an android application that displays Marvel Universe Characters and their i
 
 # Tools :
 
-* Android SDK, Kotlin, Retrofit, Picasso, MVVM, Data Binding, 
+* Android SDK, Kotlin, Retrofit, Picasso, Glide, MVVM, Data Binding, 
 * Android Jetpack Compose (Paging3 Api Library, Coroutines, LifeCycle), 
 * MotionLayout For Animations, Spannable For highlighting Characters In Text,
 * Responsive UI Using ConstraintLayout
