@@ -1,10 +1,13 @@
 # Marvel
 
-it's an android application displayes Marvel Universe Characters
+it's an android application that displays Marvel Universe Characters and their information
 
 # Tools :
 
-Android SDK, Kotlin, Retrofit, Picasso, MVVM, Data Binding, Android Jetpack Compose (Paging3 Api Library, Coroutines, LifeCycle), MotionLayout For Animations
+* Android SDK, Kotlin, Retrofit, Picasso, MVVM, Data Binding, 
+* Android Jetpack Compose (Paging3 Api Library, Coroutines, LifeCycle), 
+* MotionLayout For Animations, Spannable For highlighting Characters In Text,
+* Responsive UI Using ConstraintLayout
 
 # Screen Shots :
 
@@ -12,7 +15,6 @@ Android SDK, Kotlin, Retrofit, Picasso, MVVM, Data Binding, Android Jetpack Comp
 <img src="screen shots/4.jpg" height="250">  <img src="screen shots/5.jpg" height="250">  <img src="screen shots/6.jpg" height="250">
 <img src="screen shots/7.jpg" height="250">  <img src="screen shots/8.jpg" height="250">  <img src="screen shots/9.jpg" height="250">
 <img src="screen shots/10.jpg" height="250">
-
 
 # Apk link :
 
